@@ -1,0 +1,224 @@
+body {
+ font-family: "Arial", sans-serif;
+ background-color: #1a1a2e;
+ margin: 0;
+ padding: 0;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ height: 80vh;
+ }
+ p,h2{
+  color: white;
+ }
+  .container {
+ background-color: #16213e;
+ padding: 25px;
+ border-radius: 5px;
+ box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+ width: 95%;
+ max-width: 900px;
+ height: 80vh;
+ margin-top: 100px;
+ display: flex;
+ }
+.left{
+    /* rgb(197, 194, 194)*/
+   /* rgb(246, 244, 240)*/
+    width: 30%;
+    background-color: #0f3460;
+    padding: 15px;
+    margin: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+.right{
+     width: 70%;
+    background-color: #0f3460;
+    padding: 20px 20px 15px 15px;
+    margin: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+ p{
+   margin-bottom: 20px; 
+ }
+  .movie-select {
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ margin: 5px auto 10px auto;
+ flex-direction: column;
+ flex-wrap: wrap;
+
+ }
+  .movie-select h1{
+    width: 80%;
+    margin: 0 auto;
+  }
+ .movie-select select {
+ padding: 10px 15px;
+ border-radius: 5px;
+ border: 1px solid greenyellow;
+ }
+
+ .screen {
+ background-color: #e94560;
+ height: 15%;
+ width: 95%;
+ color: greenyellow;
+ box-shadow: 1px 1px 1px rgba(255, 255, 255, 0.5);
+ border-radius: 2%;
+margin: 5px 5px 30px 25px;
+padding: 20px 2px;
+ text-align: center;
+ font-size: 1.5em;
+ letter-spacing: 3px;
+ }
+ .seats {
+ /*position: relative;*/
+ padding: 10px;
+ width: 100%;
+ height: 80%;
+ color: blue;
+ text-align: center;
+ /*background-color: black;*/
+  display: grid;
+   grid-template-rows: [seats]80%; 
+  grid-template-columns: [row1] 33% [row2] 33% [row3] 33%;
+   grid-template-areas: 
+    "row1  row2  row3"
+    "row1  row2  row3"
+    "row1  row2  row3";
+    justify-content: space-evenly;
+    align-items: center ;
+ }
+ .seat {
+ background-color: #53a98e;
+ width: 35%;
+ height:20px;
+ margin: 5px;
+ padding: 5px;
+ border-top-left-radius: 10px;
+ border-top-right-radius: 10px;
+ cursor: pointer;
+ transition: background-color .3s,color .2s,transform .2s,letter-spacing .2s;
+ }
+ .seat:hover{
+background-color: #79d70f;
+transform: scale(1.1);
+color: black;
+letter-spacing: 2px;
+
+ }
+ .row{
+ background-color:black;
+ padding: 18px 12px;
+ margin: 10px;
+ height: 100%;
+ display: flex;
+ flex-wrap: wrap;
+ justify-content: center;
+ align-items: center;
+
+ }
+ .seat.occupied {
+ background-color: #5f0017;
+ cursor: not-allowed;
+ }
+.selected {
+ background-color: #f0a500;
+ color: black;
+ }
+  .summary {
+ display: flex;
+ flex-direction: column;
+ justify-content: space-between;
+ background-color: #16213e;
+ padding: 10px;
+ margin: 10px auto;
+ width:90%;
+ height: 50%;
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+
+ }
+ .summary p{
+    width: 45%;
+    margin: 0 auto;
+    padding: 5px;
+
+ }
+ #movie-selected{
+  width: 70%;
+  height: fit-content;
+
+  text-align: center;
+  margin: 0 auto;
+  padding: 10px;
+    border-radius: 10px;
+    color: greenyellow;
+ }
+ #ticketCount,
+ #totalPrice{
+    display: block;
+    width: 100px;
+    margin: 0 auto;
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
+    height: 50px;
+    background-color: rgb(208, 225, 219);
+    display: flex;
+   align-items: center;
+   justify-content: center;
+   font-weight: bold;
+ }
+  #ticketCount{
+    margin-bottom: 10px;
+  }
+ button {
+ padding: 10px 20px;
+ border: none;
+ border-radius: 5px;
+ background-color: #e94560;
+ color: #ffffff;
+ cursor: pointer;
+ margin: 2px auto 2px 25%;
+ transition: background-color 0.3s,letter-spacing .2s,box-shadow .2s,transform .2s;
+ }
+  button:hover {
+ background-color: #f5a7a7;;
+ box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+ letter-spacing: 2px;
+ transform: scale(1.2);
+ }
+#toast-container {
+    position: fixed; 
+    bottom: 10px;  
+   right: 20px;  
+    z-index: 1000;  
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.toast.success {
+    background-color: #53a98e; 
+}
+.toast.error {
+    background-color: yellow; 
+    color: red;
+    padding: 10px;
+    margin: 2px ;
+    border-left: solid 10px white;
+    border-radius: 5px;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+}
+.toast.show {
+    opacity: 1;
+    transform: translateY(0); /* Move into view */
+    background-color: #e94560;
+    color: white;
+    padding: 10px;
+    margin: 2px ;
+    border-left: solid 10px white;
+    border-radius: 5px;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+}
