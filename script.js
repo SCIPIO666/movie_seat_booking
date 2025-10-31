@@ -48,9 +48,15 @@ function showToast(message, type = 'default') {
 // Movie / selection getters
 // ---------------------------
 function getSelectedMovieName() {
+  const select = document.getElementById("movie");
+  const option = select.options[select.selectedIndex];
+  return option ? option.textContent : null;
+}
+
+/**function getSelectedMovieName() {
  return movieSelect.selectedOptions[0].textContent;
  
-} 
+} */
 function aggregateSeats(){
 const savedSeats=getSavedIdsForCurrentMovie();
 const selectedUnsavedSeats=getSelectedSeatIds();
@@ -62,14 +68,15 @@ function getTotalTickets(){
   const selected=getSelectedSeatIds();
   let total;
   if(selected && booked){
-        total=[...booked, ...selected];
+        total=aggregateSeats();
   }else{
         total=selected;
   }
   return total;
 
 }
-console.log(getTotalTickets());
+console.log(getTotalTickets(),getTotalTickets().length);
+
 function getSelectedSeats(){
     const selectedSeats=document.querySelectorAll(".selected");
      return selectedSeats;
@@ -78,8 +85,9 @@ function getTotalPrice(){
             //movie price
         const movieSelect=document.querySelector("#movie");
         const moviePrice=+movieSelect.value;
+      const tickets=getTotalTickets().length;
         //total price
-        const totalPrice= moviePrice*getTotalTickets().length;
+        const totalPrice= moviePrice* tickets;
         return totalPrice;
 }
 
@@ -91,10 +99,10 @@ document.addEventListener("DOMContentLoaded", () => {
   retrieveUserData();
 });
 movieSelect.addEventListener("change",e=>{
+        displayAvailableSeatsForCurrentMovie();
         const movieName = getSelectedMovieName();
          updateSelectedMovie();
          retrieveUserData();
-         displayAvailableSeatsForCurrentMovie();
 });
 
 bookButton.addEventListener("click",e=>{
@@ -145,7 +153,8 @@ function updateSelectedMovie(){
 }
 function resetSeats(){
 const selectedSeats=getSelectedSeats();
-saveSelectedAndBookedSeatsForCurrentMovie()//save seats first
+
+          saveSelectedAndBookedIdsForCurrentMovie();
   if(selectedSeats.length > 0){
 
             selectedSeats.forEach(selectedSeat => {
@@ -153,9 +162,8 @@ saveSelectedAndBookedSeatsForCurrentMovie()//save seats first
             selectedSeat.dataset.status = "occupied";
             selectedSeat.classList.add("occupied"); 
             selectedSeat.classList.remove("selected");
-            saveSelectedAndBookedSeatsForCurrentMovie()
-       
             });
+
         updateSelectedMovie();
         showToast(`Booked ${getTotalTickets().length} tickets for ${getSelectedMovieName()}!`, "success");
     }
@@ -173,7 +181,7 @@ function movieStorageKey() {
    const movieValue=getSelectedMovieName();
   return `bookedSeats_${movieValue}`;
 }
-function saveSelectedAndBookedSeatsForCurrentMovie() {
+function saveSelectedAndBookedIdsForCurrentMovie() {
   const key = movieStorageKey();
   const data = getTotalTickets(); 
   localStorage.setItem(key, JSON.stringify(data));
